@@ -20,7 +20,7 @@ client.once('ready', () => {
 // Login to Discord with your client's token
 client.login(config.token);
 
-client.on('messageCreate', require('./route/message_route'));
+client.on('messageCreate', require('./routes/message_route'));
 
 process.on('uncaughtException', (err)=>{ //최후의 에러 방어
     console.error('예기치 못한 에러',err);

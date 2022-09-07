@@ -1,5 +1,5 @@
-const commandService = require('../service/command_service');
-const musicService = require('../service/music_service');
+const commandService = require('../services/command_service');
+const musicService = require('../services/music_service');
 
 const messageRoute = async (message) =>{
     console.log(message.content);

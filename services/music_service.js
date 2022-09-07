@@ -13,6 +13,7 @@ const musicService = async(message) =>{
             adapterCreator: message.guild.voiceAdapterCreator
         }) 
     }catch(err){
+        console.error(err);
         message.channel.send('음성 모듈 관련 오류가 발생했습니다 ㅜㅜ');
     }
 }
