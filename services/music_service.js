@@ -5,7 +5,7 @@ const musicService = async(message) =>{
         console.log(message.member.voice.channelId); //채널 아이디 확인용
  
         //if(message.member.voice == null) 
-        //return message.channel.send('TTS 사용을 위해 음성채널에 있어야 합니다.');
+        return message.channel.send('현재 TTS 기능 중비중입니다~~ ^^');
         
         const connection = joinVoiceChannel({  
             channelId: message.member.voice.channelId,

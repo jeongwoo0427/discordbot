@@ -14,13 +14,13 @@ const commandService = async(message)=>{
                     .setDescription('( ~ 다음에 아래 명령어 중 선택해주세요.)')
                     .addFields([
                         {name:"노래",value:"저의 예술적인 음악선율을 '감상'해 볼실게요. ^^"},
-                        {name:"스플스케줄 또는 스플",value:"스플 스케쥴을 보여준답니다."}
+                        {name:"스플스케줄 또는 스플",value:"스플래툰의 스케줄을 보여준답니다."}
                     ])
                 ]});
 
         }else if(command == '노래'){
             const rnd = Math.floor(Math.random() * (musicTexts.blabla.length));
-            console.log('random number = '+rnd);
+            //console.log('random number = '+rnd);
             await message.channel.send(musicTexts.blabla[rnd]);
         }else if(command == '스플스케줄'||command == '스플스케쥴'||command.includes('스플')){
             await message.channel.send('https://splatoon2.ink/');
