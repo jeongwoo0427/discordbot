@@ -5,7 +5,7 @@ const dataController = require('../controllers/data_controller');
 const commandController = async(message)=>{
     try{
         const command = message.content.substr(1, message.content.length-1);
-        console.log(command);
+        //console.log(command);
         if(command.trim() == ''){
             //await message.reply('부르셨어요?');
             await message.channel.send({
