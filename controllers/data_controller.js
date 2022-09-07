@@ -8,7 +8,7 @@ const dataController = {
             let attachments;
             message.attachments.forEach(element => {
                 if(attachments==null) attachments = '';
-                attachments += `${element.url},`
+                attachments += `${element.url} `;
             });
            const rows = await messageModel.insertMessage(
                message.guild.id,
