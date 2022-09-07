@@ -2,7 +2,7 @@ const { joinVoiceChannel } = require('@discordjs/voice');
  
 const musicService = async(message) =>{
     try{
-        console.log(message.member.voice.channelId); 
+        console.log(message.member.voice.channelId); //채널 아이디 확인용
  
         //if(message.member.voice == null) 
         //return message.channel.send('TTS 사용을 위해 음성채널에 있어야 합니다.');
