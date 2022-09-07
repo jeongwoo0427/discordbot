@@ -16,6 +16,7 @@ const dataController = {
 
         }catch(err){
             console.error(err);
+            const rows = await errorLogModel.insertErrorLog(err);
         }
     },
 
