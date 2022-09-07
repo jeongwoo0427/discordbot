@@ -1,7 +1,7 @@
 const {EmbedBuilder} = require('discord.js');
 const musicTexts = require('../assets/json/music_sources.json');
 
-const commandService = async(message)=>{
+const commandController = async(message)=>{
     try{
         const command = message.content.substr(1, message.content.length-1);
         console.log(command);
@@ -33,4 +33,4 @@ const commandService = async(message)=>{
     }
 };
 
-module.exports = commandService
+module.exports = commandController

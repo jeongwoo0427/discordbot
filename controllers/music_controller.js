@@ -1,6 +1,6 @@
 const { joinVoiceChannel } = require('@discordjs/voice');
  
-const musicService = async(message) =>{
+const musicController = async(message) =>{
     try{
         console.log(message.member.voice.channelId); //채널 아이디 확인용
  
@@ -18,4 +18,4 @@ const musicService = async(message) =>{
     }
 }
 
-module.exports = musicService;
+module.exports = musicController;

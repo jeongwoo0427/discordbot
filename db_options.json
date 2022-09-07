@@ -1,0 +1,9 @@
+{
+    "host":"localhost",
+    "user":"root",
+    "password":"wjddn6462",
+    "port":"3306",
+    "database":"discorddb",
+    "connectionLimit": 5,
+    "timezone":"Asia/Seoul"
+}
