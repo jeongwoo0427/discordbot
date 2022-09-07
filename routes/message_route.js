@@ -2,7 +2,7 @@ const commandService = require('../services/command_service');
 const musicService = require('../services/music_service');
 
 const messageRoute = async (message) =>{
-    console.log(message.content);
+    //console.log(message.content); 
     if(message.author.bot || !message.guild) return; 
 
     if(message.content.substring(0,1) == '~') commandService(message);
