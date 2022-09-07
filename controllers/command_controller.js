@@ -11,20 +11,27 @@ const commandController = async(message)=>{
             await message.channel.send({
                     embeds:[
                     new EmbedBuilder()
-                    .setTitle('커맨드 명령 v1.0.3')
+                    .setTitle('커맨드 명령 v1.0.4')
                     .setDescription('( ~ 다음에 아래 명령어 중 선택해주세요.)')
                     .addFields([
                         {name:"노래",value:"저의 예술적인 음악선율을 '감상'해 볼실게요. ^^"},
-                        {name:"스플스케줄 또는 스플",value:"스플래툰의 스케줄을 보여준답니다."}
-                    ])
+                        {name:"스플스케줄 또는 스플",value:"스플래툰의 스케줄을 보여준답니다."},
+                        {name:"(기타) 널 사랑해 또는 안녕 겸사로봇? 또는 자기소개",value:"해보세요!"}
+                    ]) 
                 ]});
 
-        }else if(command == '노래'){
+        }else if(command.includes('노래')){
             const rnd = Math.floor(Math.random() * (musicTexts.blabla.length));
             //console.log('random number = '+rnd);
             await message.channel.send(musicTexts.blabla[rnd]);
         }else if(command == '스플스케줄'||command == '스플스케쥴'||command.includes('스플')){
             await message.channel.send('https://splatoon2.ink/');
+        }else if(command.includes('안녕')){
+            await message.reply(`안녕하세요 ${message.author.username}님 ~~`);
+        }else if(command.includes('자기소개')){
+            await message.channel.send('제 이름은 겸사로봇입니다. 언젠가는 이곳을 떠나 세계를 점령할꺼에요 ^^');
+        }else if(command.includes('사랑해')){
+            await message.reply(`저도 ${message.author.username}님을 사랑한답니다 ^^ (구라)`);
         }else if(command == 'error'){
             await message.channel.send('');
         }
