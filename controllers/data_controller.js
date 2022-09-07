@@ -4,6 +4,12 @@ const errorLogModel = require('../models/errorlog_model');
 const dataController = {
     insertMessage : async(message) =>{
         try{
+         
+            let attachments;
+            message.attachments.forEach(element => {
+                if(attachments==null) attachments = '';
+                attachments += `${element.url},`
+            });
            const rows = await messageModel.insertMessage(
                message.guild.id,
                message.guild.name,
@@ -12,6 +18,7 @@ const dataController = {
                message.author.id,
                message.author.username,
                message.content,
+               attachments,
                message.createdTimestamp);
 
         }catch(err){
