@@ -1,5 +1,6 @@
 const {EmbedBuilder} = require('discord.js');
 const musicTexts = require('../assets/json/music_sources.json');
+const dataController = require('../controllers/data_controller');
 
 const commandController = async(message)=>{
     try{
@@ -24,11 +25,14 @@ const commandController = async(message)=>{
             await message.channel.send(musicTexts.blabla[rnd]);
         }else if(command == '스플스케줄'||command == '스플스케쥴'||command.includes('스플')){
             await message.channel.send('https://splatoon2.ink/');
-        }else{ 
+        }else if(command == 'error'){
+            await message.channel.send('');
+        }
+        else{ 
             await message.reply(command + ' <= 이건 잘못된 커맨드에용');
         } 
     }catch(err){
-        console.error(err);
+        await dataController.insertErrorLog(err);
         message.channel.send('커맨드 모듈 관련 오류가 발생했습니다 ㅜㅜ');
     }
 };

@@ -1,4 +1,5 @@
 const messageModel = require('../models/message_model');
+const errorLogModel = require('../models/errorlog_model');
 
 const dataController = {
     insertMessage : async(message) =>{
@@ -18,8 +19,10 @@ const dataController = {
         }
     },
 
-    insertErrorLog : async(errorLog) =>{
+    insertErrorLog : async(err) =>{
         try{
+            console.error(err);
+            const rows = await errorLogModel.insertErrorLog(err);
         }catch(err){
             console.error(err);
         }

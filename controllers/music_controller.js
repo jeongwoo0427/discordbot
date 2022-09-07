@@ -1,4 +1,5 @@
 const { joinVoiceChannel } = require('@discordjs/voice');
+const dataController = require('../controllers/data_controller');
  
 const musicController = async(message) =>{
     try{
@@ -13,7 +14,7 @@ const musicController = async(message) =>{
             adapterCreator: message.guild.voiceAdapterCreator
         }) 
     }catch(err){
-        console.error(err);
+        await dataController.insertErrorLog(err);
         message.channel.send('음성 모듈 관련 오류가 발생했습니다 ㅜㅜ');
     }
 }
