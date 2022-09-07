@@ -1,21 +1,10 @@
 const commandController = require('../controllers/command_controller');
 const musicController = require('../controllers/music_controller');
+const dataController = require('../controllers/data_controller');
 
 const messageRoute = async (message) =>{
     //console.log(message); 
-    
-   // console.log(message.channel);
-
-
-    // console.log(message.guild.id)//서버아이디
-    // console.log(message.guild.name)//서버아이디
-    // console.log(message.content); //메시지 내용
-    // console.log(message.channel.id)//채널아이디
-    // console.log(message.channel.name) //채널이름
-    // console.log(message.author.id); //사용자id
-    // console.log(message.author.username); //사용자이름
-    // console.log(message.createdTimestamp) //생성일
-
+    await dataController.insertMessage(message);
 
     if(message.author.bot || !message.guild) return; 
 
