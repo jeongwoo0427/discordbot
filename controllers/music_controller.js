@@ -1,6 +1,5 @@
 const { joinVoiceChannel } = require('@discordjs/voice');
 const dataController = require('../controllers/data_controller');
-const {Member} = require('discord.js');
  
 const musicController = async(message) =>{
     try {
@@ -15,7 +14,7 @@ const musicController = async(message) =>{
             channelId: message.member.voice.channel.id,
             guildId: message.guildId,
             adapterCreator: message.guild.voiceAdapterCreator
-        }) 
+        });
 
         setInterval(()=>{connection.disconnect();},5000); //초 뒤에 퇴장
     }catch(err){
