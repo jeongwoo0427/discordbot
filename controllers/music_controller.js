@@ -16,7 +16,7 @@ const musicController = async(message) =>{
             adapterCreator: message.guild.voiceAdapterCreator
         });
 
-        setInterval(()=>{connection.disconnect();},5000); //초 뒤에 퇴장
+        //setInterval(()=>{connection.disconnect();},5000); //초 뒤에 퇴장
     }catch(err){
         await dataController.insertErrorLog(err);
         message.channel.send('음성 모듈 관련 오류가 발생했습니다 ㅜㅜ');
