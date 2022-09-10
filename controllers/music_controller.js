@@ -1,6 +1,11 @@
-const { joinVoiceChannel } = require('@discordjs/voice');
 const dataController = require('../controllers/data_controller');
+const discordTTS = require('discord-tts');
+const {AudioPlayer, createAudioResource, StreamType, entersState, VoiceConnectionState, joinVoiceChannel} = require('@discordjs/voice');
  
+
+let voiceConnection;
+let audioPlayer = new AudioPlayer();
+
 const musicController = async(message) =>{
     try {
         console.log(message.member.voice.channel);
@@ -9,6 +14,12 @@ const musicController = async(message) =>{
         }
      
         //return message.channel.send('현재 TTS 기능 중비중입니다~~ ^^');
+
+        const stream = discordTTS.getVoiceStream('hello text to speech world');
+        const audioResource = createAudioResource(stream, {inputType:StreamType.Arbitrary,inlineVolume:true});
+        if(!VoiceConnectionState || VoiceConnection){
+            
+        }
         
         const connection = joinVoiceChannel({  
             channelId: message.member.voice.channel.id,
