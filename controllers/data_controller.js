@@ -1,4 +1,5 @@
 const messageModel = require('../models/message_model');
+const voiceStateModel = require('../models/voice_state_model');
 const errorLogModel = require('../models/errorlog_model');
 
 const dataController = {
@@ -33,6 +34,22 @@ const dataController = {
             const rows = await errorLogModel.insertErrorLog(err);
         }catch(err){
             console.error(err);
+        }
+    },
+
+    insertVoiceState : async (state) =>{
+        try{
+            const status = state.channel == null?'OUT':"JOIN";
+            const rows = await voiceStateModel.insertState(
+                state.guild.id,
+                state.guild.name,
+                state.channel?.name,
+                state.member.user.username,
+                status
+                );
+        }catch(err){
+            console.error(err);
+            const rows = await errorLogModel.insertErrorLog(err);
         }
     }
 };

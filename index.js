@@ -24,6 +24,8 @@ client.login(config.token);
 
 client.on('messageCreate', require('./routes/message_route'));
 
+client.on('voiceStateUpdate',require('./routes/voice_state_route'));
+
 process.on('uncaughtException', (err)=>{ //최후의 에러 방어
     console.error('예기치 못한 에러',err);
 });
