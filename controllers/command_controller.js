@@ -25,7 +25,7 @@ const commandController = async(message)=>{
             //console.log('random number = '+rnd);
             await message.channel.send(musicTexts.blabla[rnd]);
         }else if(command == '스플스케줄'||command == '스플스케쥴'||command.includes('스플')){
-            await message.channel.send('https://splatoon2.ink/');
+            await message.channel.send('https://splatoon3.ink/');
         }else if(command.includes('안녕')){
             await message.reply(`안녕하세요 ${message.author.username}님 ~~`);
         }else if(command.includes('자기소개')){
