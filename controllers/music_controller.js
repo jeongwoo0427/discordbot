@@ -1,50 +1,64 @@
 const dataController = require('../controllers/data_controller');
+const fs = require('fs');
 //const discordTTS = require('discord-tts');
 const config = require('../config.json');
 const request = require('request');
-const {AudioPlayer, createAudioResource, StreamType, entersState, VoiceConnectionState, joinVoiceChannel} = require('@discordjs/voice');
+const {  createAudioPlayer, AudioPlayerStatus, createAudioResource,  entersState, VoiceConnectionState, joinVoiceChannel } = require('@discordjs/voice');
+const { resolve } = require('path');
+const { timeout } = require('nodemon/lib/config');
 
- 
 
-let voiceConnection;
-let audioPlayer = new AudioPlayer();
+let connection;
 
-const musicController = async(message) =>{
+
+const musicController = async (message) => {
     try {
-        console.log(message.member.voice.channel);
+        //console.log(message.member.voice.channel);
+
         if (!message.member.voice.channel) {
             return message.reply('TTS를 사용하기 위해 먼저 음성채널에 있어야 합니다.');
         }
-     
-        //return message.channel.send('현재 TTS 기능 중비중입니다~~ ^^');
 
-        // const stream = discordTTS.getVoiceStream('hello text to speech world');
-        // const audioResource = createAudioResource(stream, {inputType:StreamType.Arbitrary,inlineVolume:true});
-        // if(!VoiceConnectionState || VoiceConnection){
-            
-        // }
-        const xmlData = '<speak>테스트해보기.</speak>';
-        const options = {
-            uri : 'https://kakaoi-newtone-openapi.kakao.com/v1/synthesize',
-            method : 'POST',
+        if(message.content.length <= 1){
+            return message.reply('최소 1개 이상의 글자를 입력해주세요.');
+        }
+       
+
+        const clearMessage = message.content.substr(1, message.content.length - 1);
+
+        if(connection == null || connection.channel==null){
+            connection = joinVoiceChannel({
+                channelId: message.member.voice.channel.id,
+                guildId: message.guildId,
+                adapterCreator: message.guild.voiceAdapterCreator,
+                timeout:5
+            });
+        }
+      
+
+        if (clearMessage.includes('exit') && connection != null) {
+            return await connection.disconnect();
+        }
+
+
+        const xmlData = '<speak>'+clearMessage+'</speak>';
+
+        const post = request.post('https://kakaoi-newtone-openapi.kakao.com/v1/synthesize', {
             headers: {
                 'Content-Type': 'application/xml',
                 Authorization: `KakaoAK ${config.kakao_token}`,
             },
-            body: xmlData
-        }
-        request(options, (err,response,body)=>{
-            console.log(body);
+            body: xmlData,
+        },()=>{
+            let audioPlayer = createAudioPlayer();
+            const audioResource = createAudioResource('/home/veiz/node/discordbot/assets/audio/voice.mp3');
+            audioPlayer.play(audioResource);
+            connection.subscribe(audioPlayer);
         });
+        post.pipe(fs.createWriteStream('/home/veiz/node/discordbot/assets/audio/voice.mp3'),)
 
-        const connection = joinVoiceChannel({  
-            channelId: message.member.voice.channel.id,
-            guildId: message.guildId,
-            adapterCreator: message.guild.voiceAdapterCreator
-        });
-
-        //setInterval(()=>{connection.disconnect();},5000); //초 뒤에 퇴장
-    }catch(err){
+        //setInterval(()=>{connection.disconnect();},50*1000); //초 뒤에 퇴장
+    } catch (err) {
         await dataController.insertErrorLog(err);
         message.channel.send('음성 모듈 관련 오류가 발생했습니다 ㅜㅜ');
     }
