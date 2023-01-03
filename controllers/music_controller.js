@@ -22,9 +22,16 @@ const musicController = async (message) => {
         if(message.content.length <= 1){
             return message.reply('최소 1개 이상의 글자를 입력해주세요.');
         }
-       
+
 
         const clearMessage = message.content.substr(1, message.content.length - 1);
+
+        if (clearMessage.includes('exit') && connection != null) {
+            console.log('exit');
+            await connection.disconnect();
+            connection = null;
+            return
+        }
 
         if(connection == null || connection.channel==null){
             connection = joinVoiceChannel({
@@ -36,13 +43,11 @@ const musicController = async (message) => {
         }
       
 
-        if (clearMessage.includes('exit') && connection != null) {
-            return await connection.disconnect();
-        }
 
 
-        const xmlData = '<speak>'+clearMessage+'</speak>';
 
+        const xmlData = '<speak><voice name="Nick">'+clearMessage+'</voice></speak>';
+ 
         const post = request.post('https://kakaoi-newtone-openapi.kakao.com/v1/synthesize', {
             headers: {
                 'Content-Type': 'application/xml',
