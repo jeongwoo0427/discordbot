@@ -51,7 +51,7 @@ const musicController = async (message) => {
         <voice name="`+getVoice(rawMessage)+`">
         <prosody rate="`+ getSpeed(rawMessage) + `" volume="loud">
         `
-            +author+'님의 말  <break time="300ms"/>' 
+            //+author+'님의 말  <break time="300ms"/>' 
             +clearMessage 
             +
         `
