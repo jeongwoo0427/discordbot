@@ -12,7 +12,8 @@ const messageRoute = async (message) =>{
 
     if(message.content.substring(0,1) == '~') commandController(message);
 
-    if(message.content.substring(0,1) == `*`) musicController(message);
+    if(message.content.substring(0,1) == `*`||message.content.substring(0,1) == `!`) musicController(message);
+
 
     //일반 명령어
     //message.channel.send('message'); //메시지 전송
