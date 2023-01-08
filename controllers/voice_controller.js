@@ -24,9 +24,9 @@ const voiceController = {
                 return false
             }
     
-            const author = message.author.username;
+            const author = message.author.id;
             const rawMessage = message.content;
-            const clearMessage = message.content.replace('*','').replace('!','');
+            let clearMessage = message.content.replace('*','').replace('!','');
     
             if (clearMessage.includes('exit') && connection != null) {
                 console.log('exit');
@@ -43,6 +43,9 @@ const voiceController = {
                 });
             }
     
+        //    if(author == '384293586390351876'){
+        //        clearMessage=`띠옹`;
+        //    }
     
             const xmlData =
             `
@@ -51,7 +54,7 @@ const voiceController = {
             <prosody rate="`+ getSpeed(rawMessage) + `" volume="loud">
             `
                 //+author+'님의 말  <break time="300ms"/>' 
-                +clearMessage 
+                +clearMessage
                 +
             `
             </prosody>
